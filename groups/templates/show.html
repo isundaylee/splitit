@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="pure-g" id="group_name">
+    <div class="pure-u-1-1">
+      <p>{{ name }}</p>
+    </div>
+  </div>
+
+  {% for person in people %}
+    <div class="pure-g person-balance">
+      <div class="pure-u-3-5 name"><p>{{ person.name }}</p></div>
+      <div class="pure-u-2-5 balance"><p>{{ person.balance }}</p></div>
+    </div>
+  {% endfor %}
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form action="{% url 'groups.views.create' %}" method="post" id="new_group_form">
+  {% csrf_token %}
+  <div class="pure-g new-group-name">
+    <div class="pure-u-1">
+      <input type="text" name="name" placeholder="Name of the group. ">
+      {% if name_error %}
+        <p id="name_error">{{ name_error }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% for m in members %}
+    <div class="pure-g new-group-member">
+      <div class="pure-u-1">
+        <input type="text" name="members" value="{{ m.name }}">
+        {% if m.error %}
+          <p id="member_error">{{ m.error }}</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="pure-g new-group-submit">
+    <div class="pure-u-1">
+      <input type="submit" value="Create Group">
+    </div>
+  </div>
+  </form>
+{% endblock content %}
