@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% for g in groups reversed %}
+    <div class="pure-g group-item">
+      <div class="pure-u-1-1">
+        <a href="{% url 'show_group' group_id=g.pk %}"><p>{{ g.name }}</p></a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock content %}

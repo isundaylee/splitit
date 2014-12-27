@@ -84,12 +84,14 @@ html, button, input, select, textarea,
 }
 
 .new-group-member:nth-of-type(even),
-.transaction-member:nth-of-type(odd) {
+.transaction-member:nth-of-type(odd),
+.group-item:nth-of-type(odd) {
   background-color: #4A90E2;
 }
 
 .new-group-member:nth-of-type(odd),
-.transaction-member:nth-of-type(even) {
+.transaction-member:nth-of-type(even),
+.group-item:nth-of-type(even) {
   background-color: #AFD3FD;
 }
 
@@ -103,7 +105,8 @@ html, button, input, select, textarea,
   color: #fff;
 }
 
-.transaction-member p {
+.transaction-member p,
+.group-item p {
   box-sizing: border-box;
   width: 100%;
   line-height: 49px;
@@ -113,8 +116,13 @@ html, button, input, select, textarea,
   text-align: center;
 }
 
-.transaction-member .name p {
+.transaction-member .name p,
+.group-item p {
   text-align: left;
+}
+
+.group-item a {
+  text-decoration: none;
 }
 
 #new_group_form input[type=submit],
@@ -148,4 +156,8 @@ html, button, input, select, textarea,
   top: 2px;
   padding: 0 15px;
   color: red;
+}
+
+#titlebar a {
+  text-decoration: none;
 }

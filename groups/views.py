@@ -48,3 +48,6 @@ def create(request):
   print(member_errors)
 
   return HttpResponse(members)
+
+def index(request):
+  return render(request, 'groups.html', {'groups': Group.objects.all()})
