@@ -5,6 +5,7 @@
   <div class="pure-g" id="group_name">
     <div class="pure-u-1-1">
       <p>{{ name }}</p>
+        <a href="{% url "new_transaction" group_id=group_id %}"><i class="fa fa-plus"></i></a>
     </div>
   </div>
 
@@ -13,9 +14,10 @@
       <div class="pure-u-3-5 name"><p>{{ person.name }}</p></div>
       <div class="pure-u-2-5 balance">
         {% if person.name %}
-          <p>{{ person.balance|dollar_amount }}</p>
+          <p>{{ person.balance|stringformat:".02f"|dollar_amount }}</p>
         {% endif %}
       </div>
     </div>
   {% endfor %}
+
 {% endblock content %}

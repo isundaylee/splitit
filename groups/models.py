@@ -22,5 +22,9 @@ class Person(models.Model):
   def __str__(self):
     return self.name
 
+  def balance(self):
+    amounts = list(map(lambda t: t.amount, self.transaction_set.all()))
+    return sum(amounts)
+
   name = models.TextField()
   group = models.ForeignKey(Group, related_name='member_set')

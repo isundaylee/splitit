@@ -13,8 +13,9 @@ def show(request, group_id):
   print(group.member_set.all())
 
   return render(request, 'show.html', {
+    'group_id': group_id,
     'name': group.name,
-    'people': list(map(lambda m: {'name': m.name, 'balance': 0}, group.member_set.all()))
+    'people': list(map(lambda m: {'name': m.name, 'balance': m.balance()}, group.member_set.all()))
   })
 
 def new(request):
@@ -38,7 +39,8 @@ def create(request):
   else:
     group = Group.objects.create(name=name)
     for member in members:
-      group.member_set.create(name=member['name'])
+      if member['name']:
+        group.member_set.create(name=member['name'])
 
     return redirect('groups.views.show', group_id=group.pk)
 

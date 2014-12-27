@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block js %}
+  <script src="{% static "js/transactions.js" %}"></script>
+{% endblock js %}
+
+{% block content %}
+  <form action="{% url "create_transaction" group_id=group_id %}" method="post" id="new_transaction_form">
+  {% csrf_token %}
+  <div class="pure-g new-transaction-name">
+    <div class="pure-u-1">
+      <input type="text" name="name" placeholder="Name of the transaction. " value="{{ name }}">
+      {% if name_error %}
+        <p id="name_error">{{ name_error }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="pure-g new-transaction-amount">
+    <div class="pure-u-1">
+      <input type="text" name="amount" placeholder="Amount of the transaction in dollars. " value="{{ amount }}">
+      {% if amount_error %}
+        <p id="amount_error">{{ amount_error }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% for m in members %}
+    <div class="pure-g transaction-member" data-member-id="{{ m.pk }}">
+      <input type="hidden" name="member_ids" value="{{ m.pk }}">
+      <div class="pure-u-16-24 name">
+        <p>{{ m.name }}</p>
+      </div>
+      <div class="pure-u-4-24 owes" data-toggle-type="owes" data-member-id="{{ m.pk }}">
+        {% if m.name %}
+          <input type="checkbox" value="{{ m.pk }}" name="owes">
+          <p style="display: none; ">Owes</p>
+        {% endif %}
+      </div>
+      <div class="pure-u-4-24 paid" data-toggle-type="paid" data-member-id="{{ m.pk }}">
+        {% if m.name %}
+          <input type="checkbox" value="{{ m.pk }}" name="paid">
+          <p style="display: none; ">Paid</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="pure-g new-transaction-submit">
+    <div class="pure-u-1">
+      <input type="submit" value="Create Transaction">
+    </div>
+  </div>
+  </form>
+
+  <script>
+    {% if owes %}
+      {% for o in owes %}
+        check('owes', {{ o }});
+      {% endfor %}
+
+      {% for p in paid %}
+        check('paid', {{ p }});
+      {% endfor %}
+    {% else %}
+      $(function() {
+        $('.transaction-member .owes').each(function() {
+          check('owes', $(this).data('member-id'));
+        })
+      });
+    {% endif %}
+  </script>
+{% endblock content %}
