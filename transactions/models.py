@@ -12,5 +12,6 @@ class Transaction(models.Model):
     def __str__(self):
         pass
 
+    name = models.TextField(default='')
     amount = models.FloatField()
     member = models.ForeignKey(Person, related_name="transaction_set")

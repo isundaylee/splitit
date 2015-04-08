@@ -26,12 +26,12 @@ html, button, input, select, textarea,
   margin: 1px 0;
 }
 
-#group_name {
+#group_name, #person_name {
   padding: 0 15px;
   position: relative;
 }
 
-#group_name i {
+#group_name i, #person_name i {
   float: right;
   position: absolute;
   right: 0;
@@ -159,5 +159,9 @@ html, button, input, select, textarea,
 }
 
 #titlebar a {
+  text-decoration: none;
+}
+
+a {
   text-decoration: none;
 }

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load app_filters %}
+
+{% block content %}
+  <div class="pure-g" id="person_name">
+    <div class="pure-u-1-1">
+      <p>{{ name }}</p>
+    </div>
+  </div>
+
+
+  {% for t in transactions %}
+    <div class="pure-g person-balance">
+    <div class="pure-u-3-5 name">
+      <p>
+        {{ t.name }}
+        {% if t.amount > 0 %}
+          <span class="paid">(paid)</span>
+        {% else %}
+          <span class="owed">(owed)</span>
+        {% endif %}
+      </p>
+    </div>
+      <div class="pure-u-2-5 balance">
+        <p>{{ t.amount }}</p>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock content %}

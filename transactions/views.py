@@ -64,10 +64,10 @@ def create(request, group_id):
 
     for o in owes:
       m = get_object_or_404(Person, pk=o)
-      m.transaction_set.create(amount=owe_amount)
+      m.transaction_set.create(amount=owe_amount, name=name)
 
     for p in paid:
       m = get_object_or_404(Person, pk=p)
-      m.transaction_set.create(amount=pay_amount)
+      m.transaction_set.create(amount=pay_amount, name=name)
 
     return HttpResponseRedirect(reverse('show_group', kwargs={'group_id': group_id}))

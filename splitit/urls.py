@@ -8,6 +8,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^groups/(?P<group_id>\d+)$', 'groups.views.show', name='show_group'),
+    url(r'^groups/(?P<group_id>\d+)/(?P<person_id>\d+)$', 'groups.views.show_person', name='show_person'),
     url(r'^groups/new$', 'groups.views.new', name='new_group'),
     url(r'^groups/$', 'groups.views.create', name='create_group'),
     url(r'^groups/(?P<group_id>\d+)/transactions/new$', 'transactions.views.new', name='new_transaction'),

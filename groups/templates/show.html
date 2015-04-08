@@ -11,7 +11,7 @@
 
   {% for person in people %}
     <div class="pure-g person-balance">
-      <div class="pure-u-3-5 name"><p>{{ person.name }}</p></div>
+    <div class="pure-u-3-5 name"><a href="{% url "show_person" group_id=group_id person_id=person.id %}"><p>{{ person.name }}</p></a></div>
       <div class="pure-u-2-5 balance">
         {% if person.name %}
           <p>{{ person.balance|stringformat:".02f"|dollar_amount }}</p>

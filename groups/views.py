@@ -15,7 +15,16 @@ def show(request, group_id):
   return render(request, 'show.html', {
     'group_id': group_id,
     'name': group.name,
-    'people': list(map(lambda m: {'name': m.name, 'balance': m.balance()}, group.member_set.all()))
+    'people': list(map(lambda m: {'name': m.name, 'balance': m.balance(), 'id': m.pk}, group.member_set.all()))
+  })
+
+def show_person(request, group_id, person_id):
+  person = get_object_or_404(Person, pk = person_id)
+
+  return render(request, 'show_person.html', {
+    'person_id': person.pk,
+    'name': person.name,
+    'transactions': list(map(lambda t: {'name': t.name, 'amount': t.amount}, person.transaction_set.all())) + [{'name': 'Total balance', 'amount': person.balance()}],
   })
 
 def new(request):
